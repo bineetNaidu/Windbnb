@@ -1,7 +1,9 @@
+import { Header } from './Header';
+
 export function App() {
   return (
-    <>
-      <h1>Windbnb</h1>
-    </>
+    <div className="app" style={{ margin: '2rem 10%' }}>
+      <Header />
+    </div>
   );
 }
