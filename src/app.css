@@ -1,0 +1,21 @@
+.container {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+
+.container__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container__header > span:first-child {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.container__header > span:last-child {
+  font-size: 1rem;
+  font-weight: 400;
+  color: gray;
+}
