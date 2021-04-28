@@ -25,13 +25,10 @@ export const Room: FunctionComponent<Props> = ({
       <div className="room__metaData">
         <div className="data__">
           {isSuperhost && <span className="room__superHost">SUPER HOST</span>}
-
-          <span>{room_details}</span>
-
-          <span>{number_of_beds}</span>
+          <span>{room_details}</span> -<span> {number_of_beds} beds</span>
         </div>
 
-        <span className="room__rating">{rating}</span>
+        <span className="room__rating">{rating} ⭐</span>
       </div>
 
       <h4 className="room__desc">{room_desc}</h4>
