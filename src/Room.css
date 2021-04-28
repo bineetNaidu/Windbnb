@@ -1,0 +1,19 @@
+.room {
+  height: 155px;
+  margin: 1rem 0;
+}
+.room img {
+  height: inherit;
+  min-height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.room__metaData {
+  display: flex;
+  justify-content: space-between;
+}
+
+.room__rating {
+  float: right;
+}
