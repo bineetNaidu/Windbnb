@@ -1,0 +1,13 @@
+type Apartments {
+  photo_url: String!
+  is_super_host: Boolean
+  name: String!
+  rating: Number!
+  apartment_type: String!
+  location: String!
+  beds: Number!
+}
+
+type Query {
+  allApartments: [Apartments!]!
+}
