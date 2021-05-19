@@ -2,10 +2,10 @@ type Apartments {
   photo_url: String!
   is_super_host: Boolean
   name: String!
-  rating: Number!
+  rating: Int!
   apartment_type: String!
   location: String!
-  beds: Number!
+  beds: Int!
 }
 
 type Query {
