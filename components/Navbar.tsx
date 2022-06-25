@@ -19,15 +19,9 @@ const Navbar: FC = () => {
       </div>
 
       <div className="flex">
-        <Link href="/login">
-          <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-800 border-2 hover:bg-green-600 hover:text-white transition-all cursor-pointer mr-2">
-            Login
-          </div>
-        </Link>
-
-        <Link href="/register">
-          <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-800 border-2 hover:bg-green-600 hover:text-white transition-all cursor-pointer">
-            Register
+        <Link href="/signin">
+          <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 hover:bg-green-600 hover:text-white transition-all cursor-pointer mr-2">
+            Signin
           </div>
         </Link>
       </div>
