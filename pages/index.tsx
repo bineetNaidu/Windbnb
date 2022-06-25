@@ -1,10 +1,11 @@
 import type { NextPage } from 'next';
+import Layout from '../components/Layout';
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <Layout>
       <h1>Welcome to WindBnB</h1>
-    </div>
+    </Layout>
   );
 };
 
