@@ -1,7 +1,11 @@
-import { FC } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
+import { FC } from 'react';
+import { useUser } from '@auth0/nextjs-auth0';
 
 const Navbar: FC = () => {
+  const { user, isLoading } = useUser();
+
   return (
     <div className="flex justify-between p-6">
       <div>
@@ -19,11 +23,33 @@ const Navbar: FC = () => {
       </div>
 
       <div className="flex">
-        <Link href="/signin">
-          <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 hover:bg-green-600 hover:text-white transition-all cursor-pointer mr-2">
-            Signin
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : user ? (
+          <div className="flex">
+            <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 transition-all mr-2 flex">
+              <Image
+                src={user.picture!}
+                alt={user.name!}
+                width={25}
+                height={25}
+              />
+              <span className="ml-2">{user.name}</span>
+            </div>
+            <a
+              href="/api/auth/logout"
+              className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 hover:bg-green-600 hover:text-white transition-all cursor-pointer mr-2"
+            >
+              Logout
+            </a>
           </div>
-        </Link>
+        ) : (
+          <Link href="/signin">
+            <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 hover:bg-green-600 hover:text-white transition-all cursor-pointer mr-2">
+              Signin
+            </div>
+          </Link>
+        )}
       </div>
     </div>
   );
