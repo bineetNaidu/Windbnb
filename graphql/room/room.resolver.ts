@@ -1,38 +1,48 @@
 import { Resolver, Mutation, Query, Arg } from 'type-graphql';
 import { Room } from './room.schema';
+import { PrismaClient } from '@prisma/client';
+import { CreateRoomInput } from './createRoom.input';
 
-const ROOM = {
-  id: '1',
-  name: 'Room 1',
-  images: [
-    'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  ],
-  rating: 4,
-  apartment_type: 'Entire apartment',
-  is_super_host: true,
-  beds: 1,
-  bedrooms: 1,
-  bathrooms: 1,
-  guests: 1,
-  price: 100,
-  description: 'This is a description',
-  cancellable: true,
-  has_tv: true,
-  has_kitchen: true,
-  has_airconditioning: true,
-  has_wifi: true,
-  has_free_parking_area: true,
-};
+const prisma = new PrismaClient();
 
 @Resolver(Room)
 export class RoomResolver {
   @Query(() => [Room])
   async rooms(): Promise<Room[]> {
-    return [ROOM];
+    return prisma.room.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
   }
 
-  @Query(() => Room)
-  async room(@Arg('id') id: number): Promise<Room> {
-    return ROOM;
+  @Query(() => Room, { nullable: true })
+  async room(@Arg('id') id: number): Promise<Room | null> {
+    return prisma.room.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
+  @Mutation(() => Room)
+  async createRoom(@Arg('data') data: CreateRoomInput): Promise<Room> {
+    return prisma.room.create({
+      data,
+    });
+  }
+
+  @Mutation(() => Boolean)
+  async deleteRoom(@Arg('id') id: number): Promise<boolean> {
+    try {
+      await prisma.room.delete({
+        where: {
+          id,
+        },
+      });
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 }
