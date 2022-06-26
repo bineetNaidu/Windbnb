@@ -3,7 +3,7 @@ import { ObjectType, Field, ID, Int } from 'type-graphql';
 @ObjectType()
 export class Room {
   @Field(() => ID)
-  id!: string;
+  id!: number;
 
   @Field(() => String)
   name!: string;
@@ -15,10 +15,13 @@ export class Room {
   rating!: number;
 
   @Field(() => String)
-  apartment_type!: string;
+  apartmentType!: string;
+
+  @Field(() => String)
+  location!: string;
 
   @Field(() => Boolean)
-  is_super_host!: boolean;
+  isSuperhost!: boolean;
 
   @Field(() => Int)
   beds!: number;
@@ -42,17 +45,23 @@ export class Room {
   cancellable!: boolean;
 
   @Field(() => Boolean)
-  has_tv!: boolean;
+  hasTv!: boolean;
 
   @Field(() => Boolean)
-  has_kitchen!: boolean;
+  hasKitchen!: boolean;
 
   @Field(() => Boolean)
-  has_airconditioning!: boolean;
+  hasAirconditioning!: boolean;
 
   @Field(() => Boolean)
-  has_wifi!: boolean;
+  hasWifi!: boolean;
 
   @Field(() => Boolean)
-  has_free_parking_area!: boolean;
+  hasFreeParking!: boolean;
+
+  @Field(() => String)
+  createdAt!: Date;
+
+  @Field(() => String)
+  updatedAt!: Date;
 }
