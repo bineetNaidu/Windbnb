@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Room {
+  id                 Int      @id @default(autoincrement())
+  name               String
+  images             String[]
+  rating             Int      @default(0)
+  apartmentType      String   @map("apartment_type")
+  location           String
+  isSuperhost        Boolean  @default(false) @map("is_superhost")
+  beds               Int      @default(0)
+  bedrooms           Int      @default(0)
+  bathrooms          Int      @default(0)
+  guests             Int      @default(0)
+  price              Int      @default(0)
+  description        String
+  cancellable        Boolean  @default(true)
+  hasTv              Boolean  @default(true) @map("has_tv")
+  hasKitchen         Boolean  @default(true) @map("has_kitchen")
+  hasAirconditioning Boolean  @default(true) @map("has_airconditioning")
+  hasWifi            Boolean  @default(true) @map("has_wifi")
+  hasFreeParking     Boolean  @default(true) @map("has_free_parking")
+  createdAt          DateTime @default(now()) @map(name: "created_at")
+  updatedAt          DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "rooms")
+}
