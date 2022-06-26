@@ -1,0 +1,5 @@
+query getRoom($id: Float!) {
+  room(id: $id) {
+    ...RoomFragment
+  }
+}

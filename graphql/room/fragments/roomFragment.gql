@@ -1,0 +1,23 @@
+fragment RoomFragment on Room {
+  id
+  name
+  images
+  rating
+  apartmentType
+  location
+  isSuperhost
+  beds
+  bedrooms
+  bathrooms
+  guests
+  price
+  description
+  cancellable
+  hasTv
+  hasKitchen
+  hasAirconditioning
+  hasWifi
+  hasFreeParking
+  createdAt
+  updatedAt
+}

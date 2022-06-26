@@ -1,0 +1,5 @@
+query getRooms {
+  rooms {
+    ...RoomFragment
+  }
+}
