@@ -10,7 +10,8 @@
     "prisma:gen": "prisma generate",
     "prisma:db:push": "dotenv -e .env.local prisma db push",
     "prisma:studio": "dotenv -e .env.local prisma studio",
-    "prisma:db:migrate": "dotenv -e .env.local prisma migrate dev"
+    "prisma:db:migrate": "dotenv -e .env.local prisma migrate dev",
+    "gen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^1.9.1",
@@ -18,14 +19,22 @@
     "apollo-server-micro": "^3.9.0",
     "class-validator": "^0.13.2",
     "graphql": "^15.5.0",
+    "graphql-request": "^4.3.0",
     "micro": "^9.3.4",
     "next": "12.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-query": "^3.39.1",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/fragment-matcher": "3.2.1",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/typescript": "2.5.1",
+    "@graphql-codegen/typescript-operations": "2.4.2",
+    "@graphql-codegen/typescript-graphql-request": "^4.4.10",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
