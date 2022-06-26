@@ -2,9 +2,10 @@ import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server-micro';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { buildSchema } from 'type-graphql';
+import { RoomResolver } from '../../graphql/room/room.resolver';
 
 const schema = await buildSchema({
-  resolvers: [],
+  resolvers: [RoomResolver],
 });
 
 const server = new ApolloServer({
