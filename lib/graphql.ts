@@ -15,6 +15,14 @@ export type Scalars = {
   Float: number;
 };
 
+export type CreateHostInput = {
+  avatar_url: Scalars['String'];
+  country: Scalars['String'];
+  email: Scalars['String'];
+  name: Scalars['String'];
+  phoneNumber: Scalars['Int'];
+};
+
 export type CreateRoomInput = {
   apartmentType: Scalars['String'];
   bathrooms: Scalars['Int'];
@@ -28,6 +36,7 @@ export type CreateRoomInput = {
   hasKitchen?: InputMaybe<Scalars['Boolean']>;
   hasTv?: InputMaybe<Scalars['Boolean']>;
   hasWifi?: InputMaybe<Scalars['Boolean']>;
+  hostEmail: Scalars['String'];
   images: Array<Scalars['String']>;
   isSuperhost: Scalars['Boolean'];
   location: Scalars['String'];
@@ -36,10 +45,29 @@ export type CreateRoomInput = {
   rating: Scalars['Int'];
 };
 
+export type Host = {
+  __typename?: 'Host';
+  avatar_url: Scalars['String'];
+  country: Scalars['String'];
+  createdAt: Scalars['String'];
+  email: Scalars['String'];
+  id: Scalars['Int'];
+  name: Scalars['String'];
+  phoneNumber: Scalars['Int'];
+  rooms: Array<Room>;
+  updatedAt: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  createHost: Host;
   createRoom: Room;
   deleteRoom: Scalars['Boolean'];
+};
+
+
+export type MutationCreateHostArgs = {
+  data: CreateHostInput;
 };
 
 
@@ -54,8 +82,14 @@ export type MutationDeleteRoomArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  host?: Maybe<Host>;
   room?: Maybe<Room>;
   rooms: Array<Room>;
+};
+
+
+export type QueryHostArgs = {
+  email: Scalars['String'];
 };
 
 
@@ -78,6 +112,7 @@ export type Room = {
   hasKitchen: Scalars['Boolean'];
   hasTv: Scalars['Boolean'];
   hasWifi: Scalars['Boolean'];
+  host?: Maybe<Host>;
   id: Scalars['ID'];
   images: Array<Scalars['String']>;
   isSuperhost: Scalars['Boolean'];
@@ -87,6 +122,22 @@ export type Room = {
   rating: Scalars['Int'];
   updatedAt: Scalars['String'];
 };
+
+export type HostFragmentFragment = { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string };
+
+export type CreateHostMutationVariables = Exact<{
+  data: CreateHostInput;
+}>;
+
+
+export type CreateHostMutation = { __typename?: 'Mutation', createHost: { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string } };
+
+export type GetHostQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type GetHostQuery = { __typename?: 'Query', host?: { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string, rooms: Array<{ __typename?: 'Room', id: string, name: string, images: Array<string>, rating: number, apartmentType: string, location: string, isSuperhost: boolean, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string }> } | null };
 
 export type RoomFragmentFragment = { __typename?: 'Room', id: string, name: string, images: Array<string>, rating: number, apartmentType: string, location: string, isSuperhost: boolean, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string };
 
@@ -109,13 +160,23 @@ export type GetRoomQueryVariables = Exact<{
 }>;
 
 
-export type GetRoomQuery = { __typename?: 'Query', room?: { __typename?: 'Room', id: string, name: string, images: Array<string>, rating: number, apartmentType: string, location: string, isSuperhost: boolean, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string } | null };
+export type GetRoomQuery = { __typename?: 'Query', room?: { __typename?: 'Room', id: string, name: string, images: Array<string>, rating: number, apartmentType: string, location: string, isSuperhost: boolean, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string, host?: { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string } | null } | null };
 
 export type GetRoomsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetRoomsQuery = { __typename?: 'Query', rooms: Array<{ __typename?: 'Room', id: string, name: string, images: Array<string>, rating: number, apartmentType: string, location: string, isSuperhost: boolean, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string }> };
 
+export const HostFragmentFragmentDoc = gql`
+    fragment HostFragment on Host {
+  id
+  name
+  email
+  phoneNumber
+  country
+  avatar_url
+}
+    `;
 export const RoomFragmentFragmentDoc = gql`
     fragment RoomFragment on Room {
   id
@@ -141,6 +202,24 @@ export const RoomFragmentFragmentDoc = gql`
   updatedAt
 }
     `;
+export const CreateHostDocument = gql`
+    mutation createHost($data: CreateHostInput!) {
+  createHost(data: $data) {
+    ...HostFragment
+  }
+}
+    ${HostFragmentFragmentDoc}`;
+export const GetHostDocument = gql`
+    query getHost($email: String!) {
+  host(email: $email) {
+    ...HostFragment
+    rooms {
+      ...RoomFragment
+    }
+  }
+}
+    ${HostFragmentFragmentDoc}
+${RoomFragmentFragmentDoc}`;
 export const CreateRoomDocument = gql`
     mutation createRoom($data: CreateRoomInput!) {
   createRoom(data: $data) {
@@ -157,9 +236,13 @@ export const GetRoomDocument = gql`
     query getRoom($id: Float!) {
   room(id: $id) {
     ...RoomFragment
+    host {
+      ...HostFragment
+    }
   }
 }
-    ${RoomFragmentFragmentDoc}`;
+    ${RoomFragmentFragmentDoc}
+${HostFragmentFragmentDoc}`;
 export const GetRoomsDocument = gql`
     query getRooms {
   rooms {
@@ -175,6 +258,12 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    createHost(variables: CreateHostMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateHostMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateHostMutation>(CreateHostDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createHost', 'mutation');
+    },
+    getHost(variables: GetHostQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetHostQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetHostQuery>(GetHostDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getHost', 'query');
+    },
     createRoom(variables: CreateRoomMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<CreateRoomMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateRoomMutation>(CreateRoomDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createRoom', 'mutation');
     },
