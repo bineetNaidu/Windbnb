@@ -27,7 +27,7 @@ const Navbar: FC = () => {
           <div>Loading...</div>
         ) : user ? (
           <div className="flex">
-            <Link href="/become-hosts">
+            <Link href="/host/become-host">
               <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 hover:bg-green-600 hover:text-white transition-all cursor-pointer mr-2">
                 Become Host
               </div>

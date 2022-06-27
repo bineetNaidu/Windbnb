@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
-import Layout from '../components/Layout';
+import Layout from '../../components/Layout';
 
-const BecomeHosts: NextPage = () => {
+const BecomeHost: NextPage = () => {
   return (
     <Layout title="Host Your Home in WindBnb">
       <main className="flex flex-col justify-center items-center mt-10">
@@ -31,4 +31,4 @@ const BecomeHosts: NextPage = () => {
   );
 };
 
-export default BecomeHosts;
+export default BecomeHost;
