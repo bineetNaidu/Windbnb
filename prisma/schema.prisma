@@ -10,6 +10,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Host {
+  id          Int      @id @default(autoincrement())
+  name        String
+  avatar_url  String
+  email       String   @unique
+  phoneNumber Int      @unique @map(name: "phone_number")
+  country     String
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+  rooms       Room[]
+
+  @@map(name: "hosts")
+}
+
 model Room {
   id                 Int      @id @default(autoincrement())
   name               String
@@ -32,6 +46,8 @@ model Room {
   hasFreeParking     Boolean  @default(true) @map("has_free_parking")
   createdAt          DateTime @default(now()) @map(name: "created_at")
   updatedAt          DateTime @updatedAt @map(name: "updated_at")
+  host               Host     @relation(fields: [hostId], references: [id])
+  hostId             Int      @map("host_id")
 
   @@map(name: "rooms")
 }
