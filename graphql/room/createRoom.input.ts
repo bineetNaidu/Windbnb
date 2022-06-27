@@ -55,4 +55,7 @@ export class CreateRoomInput {
 
   @Field(() => Boolean, { nullable: true })
   hasFreeParking?: boolean;
+
+  @Field()
+  hostEmail!: string;
 }

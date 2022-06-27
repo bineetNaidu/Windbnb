@@ -1,4 +1,5 @@
 import { ObjectType, Field, ID, Int } from 'type-graphql';
+import { Host } from '../hosts/host.schema';
 
 @ObjectType()
 export class Room {
@@ -64,4 +65,7 @@ export class Room {
 
   @Field(() => String)
   updatedAt!: Date;
+
+  @Field(() => Host, { nullable: true })
+  host?: Host;
 }

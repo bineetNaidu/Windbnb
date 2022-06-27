@@ -22,13 +22,23 @@ export class RoomResolver {
       where: {
         id,
       },
+      include: {
+        host: true,
+      },
     });
   }
 
   @Mutation(() => Room)
   async createRoom(@Arg('data') data: CreateRoomInput): Promise<Room> {
     return prisma.room.create({
-      data,
+      data: {
+        ...data,
+        host: {
+          connect: {
+            email: data.hostEmail,
+          },
+        },
+      },
     });
   }
 
