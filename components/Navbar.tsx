@@ -27,6 +27,11 @@ const Navbar: FC = () => {
           <div>Loading...</div>
         ) : user ? (
           <div className="flex">
+            <Link href="/become-hosts">
+              <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 hover:bg-green-600 hover:text-white transition-all cursor-pointer mr-2">
+                Become Host
+              </div>
+            </Link>
             <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 transition-all mr-2 flex">
               <Image
                 src={user.picture!}
@@ -36,12 +41,11 @@ const Navbar: FC = () => {
               />
               <span className="ml-2">{user.name}</span>
             </div>
-            <a
-              href="/api/auth/logout"
-              className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 hover:bg-green-600 hover:text-white transition-all cursor-pointer mr-2"
-            >
-              Logout
-            </a>
+            <Link href="/api/auth/logout">
+              <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 hover:bg-green-600 hover:text-white transition-all cursor-pointer mr-2">
+                Logout
+              </div>
+            </Link>
           </div>
         ) : (
           <Link href="/signin">
