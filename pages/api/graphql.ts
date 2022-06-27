@@ -3,9 +3,10 @@ import { ApolloServer } from 'apollo-server-micro';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { buildSchema } from 'type-graphql';
 import { RoomResolver } from '../../graphql/room/room.resolver';
+import { HostResolver } from '../../graphql/hosts/host.resolver';
 
 const schema = await buildSchema({
-  resolvers: [RoomResolver],
+  resolvers: [HostResolver, RoomResolver],
 });
 
 const server = new ApolloServer({

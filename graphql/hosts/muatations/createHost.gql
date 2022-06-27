@@ -1,0 +1,5 @@
+mutation createHost($data: CreateHostInput!) {
+  createHost(data: $data) {
+    ...HostFragment
+  }
+}

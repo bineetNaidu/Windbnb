@@ -1,0 +1,8 @@
+query getHost($email: String!) {
+  host(email: $email) {
+    ...HostFragment
+    rooms {
+      ...RoomFragment
+    }
+  }
+}

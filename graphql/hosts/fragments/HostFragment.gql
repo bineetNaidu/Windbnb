@@ -1,0 +1,8 @@
+fragment HostFragment on Host {
+  id
+  name
+  email
+  phoneNumber
+  country
+  avatar_url
+}
