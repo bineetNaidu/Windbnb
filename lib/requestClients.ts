@@ -21,4 +21,5 @@ export const {
   deleteRoom,
   createHost,
   getHost,
+  roomsByHost,
 } = getSdk(gqlClient);

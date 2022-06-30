@@ -20,7 +20,7 @@ export type CreateHostInput = {
   country: Scalars['String'];
   email: Scalars['String'];
   name: Scalars['String'];
-  phoneNumber: Scalars['Int'];
+  phoneNumber: Scalars['Float'];
 };
 
 export type CreateRoomInput = {
@@ -85,6 +85,7 @@ export type Query = {
   host?: Maybe<Host>;
   room?: Maybe<Room>;
   rooms: Array<Room>;
+  roomsByHost: Array<Room>;
 };
 
 
@@ -95,6 +96,11 @@ export type QueryHostArgs = {
 
 export type QueryRoomArgs = {
   id: Scalars['Float'];
+};
+
+
+export type QueryRoomsByHostArgs = {
+  hostEmail: Scalars['String'];
 };
 
 export type Room = {
@@ -166,6 +172,13 @@ export type GetRoomsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetRoomsQuery = { __typename?: 'Query', rooms: Array<{ __typename?: 'Room', id: string, name: string, images: Array<string>, rating: number, apartmentType: string, location: string, isSuperhost: boolean, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string }> };
+
+export type RoomsByHostQueryVariables = Exact<{
+  hostEmail: Scalars['String'];
+}>;
+
+
+export type RoomsByHostQuery = { __typename?: 'Query', roomsByHost: Array<{ __typename?: 'Room', id: string, name: string, images: Array<string>, rating: number, apartmentType: string, location: string, isSuperhost: boolean, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string, host?: { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string } | null }> };
 
 export const HostFragmentFragmentDoc = gql`
     fragment HostFragment on Host {
@@ -250,6 +263,17 @@ export const GetRoomsDocument = gql`
   }
 }
     ${RoomFragmentFragmentDoc}`;
+export const RoomsByHostDocument = gql`
+    query roomsByHost($hostEmail: String!) {
+  roomsByHost(hostEmail: $hostEmail) {
+    ...RoomFragment
+    host {
+      ...HostFragment
+    }
+  }
+}
+    ${RoomFragmentFragmentDoc}
+${HostFragmentFragmentDoc}`;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -275,6 +299,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getRooms(variables?: GetRoomsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetRoomsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetRoomsQuery>(GetRoomsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getRooms', 'query');
+    },
+    roomsByHost(variables: RoomsByHostQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<RoomsByHostQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<RoomsByHostQuery>(RoomsByHostDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'roomsByHost', 'query');
     }
   };
 }

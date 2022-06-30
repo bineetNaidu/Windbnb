@@ -16,6 +16,20 @@ export class RoomResolver {
     });
   }
 
+  @Query(() => [Room])
+  async roomsByHost(@Arg('hostEmail') hostEmail: string): Promise<Room[]> {
+    return prisma.room.findMany({
+      where: {
+        host: {
+          email: hostEmail,
+        },
+      },
+      include: {
+        host: true,
+      },
+    });
+  }
+
   @Query(() => Room, { nullable: true })
   async room(@Arg('id') id: number): Promise<Room | null> {
     return prisma.room.findUnique({
