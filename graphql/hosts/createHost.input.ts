@@ -1,4 +1,4 @@
-import { InputType, Field, Int } from 'type-graphql';
+import { InputType, Field, Float } from 'type-graphql';
 
 @InputType()
 export class CreateHostInput {
@@ -11,7 +11,7 @@ export class CreateHostInput {
   @Field()
   email!: string;
 
-  @Field(() => Int)
+  @Field(() => Float)
   phoneNumber!: number;
 
   @Field()
