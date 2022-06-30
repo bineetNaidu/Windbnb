@@ -2,9 +2,23 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 import { useUser } from '@auth0/nextjs-auth0';
+import { useQuery } from 'react-query';
+import { getHost } from '../lib/requestClients';
+import { useEffect } from 'react';
 
 const Navbar: FC = () => {
   const { user, isLoading } = useUser();
+  const {
+    data: getHostdata,
+    isLoading: isLoadingHost,
+    refetch: getHostRefetch,
+  } = useQuery(['host'], () => getHost({ email: user?.email ?? '' }));
+
+  useEffect(() => {
+    if (user) {
+      getHostRefetch();
+    }
+  }, [user, getHostRefetch]);
 
   return (
     <div className="flex justify-between p-6">
@@ -27,11 +41,19 @@ const Navbar: FC = () => {
           <div>Loading...</div>
         ) : user ? (
           <div className="flex">
-            <Link href="/host/become-host">
-              <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 hover:bg-green-600 hover:text-white transition-all cursor-pointer mr-2">
-                Become Host
-              </div>
-            </Link>
+            {getHostdata?.host ? (
+              <Link href="/host/homes">
+                <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 hover:bg-green-600 hover:text-white transition-all cursor-pointer mr-2">
+                  Your Homes
+                </div>
+              </Link>
+            ) : (
+              <Link href="/host/become-host">
+                <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 hover:bg-green-600 hover:text-white transition-all cursor-pointer mr-2">
+                  Become Host
+                </div>
+              </Link>
+            )}
             <div className="bg-green-300 border-green-600 px-4 py-2 rounded-lg text-green-900 border-2 transition-all mr-2 flex">
               <Image
                 src={user.picture!}
