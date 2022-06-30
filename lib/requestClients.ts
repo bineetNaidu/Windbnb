@@ -14,4 +14,11 @@ export const queryClient = new QueryClient({
   },
 });
 
-export const { getRoom, getRooms, createRoom, deleteRoom } = getSdk(gqlClient);
+export const {
+  getRoom,
+  getRooms,
+  createRoom,
+  deleteRoom,
+  createHost,
+  getHost,
+} = getSdk(gqlClient);

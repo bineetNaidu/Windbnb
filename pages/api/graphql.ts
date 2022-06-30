@@ -11,6 +11,10 @@ const schema = await buildSchema({
 
 const server = new ApolloServer({
   schema,
+  context: ({ req, res }: { req: NextApiRequest; res: NextApiResponse }) => ({
+    req,
+    res,
+  }),
 });
 
 export const config = {
