@@ -54,11 +54,11 @@ const CreateHostModal: FC<CreateHostModalProps> = ({
                       country: '',
                       phoneNumber: 0,
                     });
-                    router.push('/hosts');
+                    router.push('/host/homes');
                     handleClose();
                     setSubmitting(false);
                   } catch (error) {
-                    toast.error((error as Error).message);
+                    toast.error((error as any).response.errors[0].message);
                   }
                 }}
               >
