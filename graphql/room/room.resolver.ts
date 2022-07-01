@@ -24,6 +24,9 @@ export class RoomResolver {
           email: hostEmail,
         },
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
       include: {
         host: true,
       },
