@@ -3,6 +3,7 @@ import Layout from '../../../components/Layout';
 import { withPageAuthRequired, useUser, getSession } from '@auth0/nextjs-auth0';
 import { dehydrate, useQuery } from 'react-query';
 import { queryClient, roomsByHost } from '../../../lib/requestClients';
+import { PropertyCard } from '../../../components/PropertyCard';
 
 const HostHomes = () => {
   const { user } = useUser();
@@ -34,19 +35,15 @@ const HostHomes = () => {
 
       <hr className="border-b-1 border-green-500 my-5" />
 
-      <article>
+      <article className="pb-8">
         {isLoadingHostRooms ? (
           <div>Loading...</div>
         ) : hostRoomData?.roomsByHost?.length ? (
-          <ul className="list-none">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
             {hostRoomData.roomsByHost.map((room) => (
-              <li key={room.id}>
-                <Link href={`/rooms/${room.id}`}>
-                  <a className="text-green-700">{room.name}</a>
-                </Link>
-              </li>
+              <PropertyCard room={room} key={room.id} />
             ))}
-          </ul>
+          </div>
         ) : (
           <div className="text-center">
             <h2 className="text-3xl font-thin text-green-600 italic mb-5">
