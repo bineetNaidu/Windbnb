@@ -4,7 +4,7 @@ import { Field } from '../../../components/Field';
 import Layout from '../../../components/Layout';
 import { prisma } from '../../../lib/prisma';
 import { useMutation } from 'react-query';
-import { createRoom, queryClient } from '../../../lib/requestClients';
+import { createRoom } from '../../../lib/requestClients';
 import { CreateRoomInput } from '../../../lib/graphql';
 import toast, { Toaster } from 'react-hot-toast';
 import { NextPage } from 'next';
@@ -55,7 +55,6 @@ const NewHome: NextPage = () => {
                 bathrooms: parseInt(values.bathrooms as any),
                 guests: parseInt(values.guests as any),
                 price: parseInt(values.price as any),
-                isSuperhost: false,
                 hostEmail: user?.email!,
               });
               toast.success('Your home has been listed!');
