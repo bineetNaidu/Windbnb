@@ -22,7 +22,7 @@ export class Host {
   country!: string;
 
   @Field(() => Boolean)
-  isSuperHost!: boolean;
+  isSuperhost!: boolean;
 
   @Field(() => String)
   createdAt?: Date;

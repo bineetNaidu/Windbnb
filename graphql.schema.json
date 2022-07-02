@@ -472,7 +472,7 @@
             "deprecationReason": null
           },
           {
-            "name": "isSuperHost",
+            "name": "isSuperhost",
             "description": null,
             "args": [],
             "type": {
