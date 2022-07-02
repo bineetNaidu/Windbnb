@@ -9,7 +9,7 @@ interface PropertyCardProps {
 
 const PropertyCard: FC<PropertyCardProps> = ({ room }) => {
   return (
-    <Link href={`/rooms/${room.id}`}>
+    <Link href={`/room/${room.id}`}>
       <article className="rounded-xl flex flex-col group cursor-pointer">
         <div className="flex-auto z-10">
           <Image
