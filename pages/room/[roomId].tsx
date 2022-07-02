@@ -51,7 +51,7 @@ const Home: NextPage<{ roomId: number }> = ({ roomId }) => {
           <div className="mb-8">
             <h1 className="text-4xl text-green-700 font-bold">
               <span>{data.room.name}</span>
-              {data.room.isSuperhost && (
+              {data.room.host?.isSuperhost && (
                 <span className="text-base border border-green-600 rounded p-1 ml-3">
                   <i className="fa-solid fa-star mr-1"></i>
                   SuperHost
