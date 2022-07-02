@@ -21,6 +21,9 @@ export class Host {
   @Field()
   country!: string;
 
+  @Field(() => Boolean)
+  isSuperHost!: boolean;
+
   @Field(() => String)
   createdAt?: Date;
 

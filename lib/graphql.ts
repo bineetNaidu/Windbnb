@@ -38,11 +38,9 @@ export type CreateRoomInput = {
   hasWifi?: InputMaybe<Scalars['Boolean']>;
   hostEmail: Scalars['String'];
   images: Array<Scalars['String']>;
-  isSuperhost: Scalars['Boolean'];
   location: Scalars['String'];
   name: Scalars['String'];
   price: Scalars['Int'];
-  rating: Scalars['Int'];
 };
 
 export type Host = {
@@ -52,6 +50,7 @@ export type Host = {
   createdAt: Scalars['String'];
   email: Scalars['String'];
   id: Scalars['Int'];
+  isSuperHost: Scalars['Boolean'];
   name: Scalars['String'];
   phoneNumber: Scalars['Int'];
   rooms: Array<Room>;
@@ -121,38 +120,36 @@ export type Room = {
   host?: Maybe<Host>;
   id: Scalars['ID'];
   images: Array<Scalars['String']>;
-  isSuperhost: Scalars['Boolean'];
   location: Scalars['String'];
   name: Scalars['String'];
   price: Scalars['Int'];
-  rating: Scalars['Int'];
   updatedAt: Scalars['String'];
 };
 
-export type HostFragmentFragment = { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string };
+export type HostFragmentFragment = { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string, isSuperHost: boolean };
 
 export type CreateHostMutationVariables = Exact<{
   data: CreateHostInput;
 }>;
 
 
-export type CreateHostMutation = { __typename?: 'Mutation', createHost: { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string } };
+export type CreateHostMutation = { __typename?: 'Mutation', createHost: { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string, isSuperHost: boolean } };
 
 export type GetHostQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type GetHostQuery = { __typename?: 'Query', host?: { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string, rooms: Array<{ __typename?: 'Room', id: string, name: string, images: Array<string>, rating: number, apartmentType: string, location: string, isSuperhost: boolean, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string }> } | null };
+export type GetHostQuery = { __typename?: 'Query', host?: { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string, isSuperHost: boolean, rooms: Array<{ __typename?: 'Room', id: string, name: string, images: Array<string>, apartmentType: string, location: string, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string }> } | null };
 
-export type RoomFragmentFragment = { __typename?: 'Room', id: string, name: string, images: Array<string>, rating: number, apartmentType: string, location: string, isSuperhost: boolean, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string };
+export type RoomFragmentFragment = { __typename?: 'Room', id: string, name: string, images: Array<string>, apartmentType: string, location: string, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string };
 
 export type CreateRoomMutationVariables = Exact<{
   data: CreateRoomInput;
 }>;
 
 
-export type CreateRoomMutation = { __typename?: 'Mutation', createRoom: { __typename?: 'Room', id: string, name: string, images: Array<string>, rating: number, apartmentType: string, location: string, isSuperhost: boolean, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string } };
+export type CreateRoomMutation = { __typename?: 'Mutation', createRoom: { __typename?: 'Room', id: string, name: string, images: Array<string>, apartmentType: string, location: string, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string } };
 
 export type DeleteRoomMutationVariables = Exact<{
   id: Scalars['Float'];
@@ -166,19 +163,19 @@ export type GetRoomQueryVariables = Exact<{
 }>;
 
 
-export type GetRoomQuery = { __typename?: 'Query', room?: { __typename?: 'Room', id: string, name: string, images: Array<string>, rating: number, apartmentType: string, location: string, isSuperhost: boolean, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string, host?: { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string } | null } | null };
+export type GetRoomQuery = { __typename?: 'Query', room?: { __typename?: 'Room', id: string, name: string, images: Array<string>, apartmentType: string, location: string, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string, host?: { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string, isSuperHost: boolean } | null } | null };
 
 export type GetRoomsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetRoomsQuery = { __typename?: 'Query', rooms: Array<{ __typename?: 'Room', id: string, name: string, images: Array<string>, rating: number, apartmentType: string, location: string, isSuperhost: boolean, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string }> };
+export type GetRoomsQuery = { __typename?: 'Query', rooms: Array<{ __typename?: 'Room', id: string, name: string, images: Array<string>, apartmentType: string, location: string, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string }> };
 
 export type RoomsByHostQueryVariables = Exact<{
   hostEmail: Scalars['String'];
 }>;
 
 
-export type RoomsByHostQuery = { __typename?: 'Query', roomsByHost: Array<{ __typename?: 'Room', id: string, name: string, images: Array<string>, rating: number, apartmentType: string, location: string, isSuperhost: boolean, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string, host?: { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string } | null }> };
+export type RoomsByHostQuery = { __typename?: 'Query', roomsByHost: Array<{ __typename?: 'Room', id: string, name: string, images: Array<string>, apartmentType: string, location: string, beds: number, bedrooms: number, bathrooms: number, guests: number, price: number, description: string, cancellable: boolean, hasTv: boolean, hasKitchen: boolean, hasAirconditioning: boolean, hasWifi: boolean, hasFreeParking: boolean, createdAt: string, updatedAt: string, host?: { __typename?: 'Host', id: number, name: string, email: string, phoneNumber: number, country: string, avatar_url: string, isSuperHost: boolean } | null }> };
 
 export const HostFragmentFragmentDoc = gql`
     fragment HostFragment on Host {
@@ -188,6 +185,7 @@ export const HostFragmentFragmentDoc = gql`
   phoneNumber
   country
   avatar_url
+  isSuperHost
 }
     `;
 export const RoomFragmentFragmentDoc = gql`
@@ -195,10 +193,8 @@ export const RoomFragmentFragmentDoc = gql`
   id
   name
   images
-  rating
   apartmentType
   location
-  isSuperhost
   beds
   bedrooms
   bathrooms

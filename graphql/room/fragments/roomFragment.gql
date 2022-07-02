@@ -2,10 +2,8 @@ fragment RoomFragment on Room {
   id
   name
   images
-  rating
   apartmentType
   location
-  isSuperhost
   beds
   bedrooms
   bathrooms

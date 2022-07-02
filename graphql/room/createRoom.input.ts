@@ -8,17 +8,11 @@ export class CreateRoomInput {
   @Field(() => [String])
   images!: string[];
 
-  @Field(() => Int)
-  rating!: number;
-
   @Field(() => String)
   apartmentType!: string;
 
   @Field(() => String)
   location!: string;
-
-  @Field(() => Boolean)
-  isSuperhost!: boolean;
 
   @Field(() => Int)
   beds!: number;

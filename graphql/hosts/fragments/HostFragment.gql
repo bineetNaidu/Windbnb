@@ -5,4 +5,5 @@ fragment HostFragment on Host {
   phoneNumber
   country
   avatar_url
+  isSuperHost
 }
