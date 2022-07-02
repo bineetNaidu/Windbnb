@@ -8,11 +8,10 @@ import { useEffect } from 'react';
 
 const Navbar: FC = () => {
   const { user, isLoading } = useUser();
-  const {
-    data: getHostdata,
-    isLoading: isLoadingHost,
-    refetch: getHostRefetch,
-  } = useQuery(['host'], () => getHost({ email: user?.email ?? '' }));
+  const { data: getHostdata, refetch: getHostRefetch } = useQuery(
+    ['host'],
+    () => getHost({ email: user?.email ?? '' })
+  );
 
   useEffect(() => {
     if (user) {
@@ -23,7 +22,9 @@ const Navbar: FC = () => {
   return (
     <div className="flex justify-between p-6">
       <div>
-        <a className="text-3xl font-bold text-green-800">WindBnB</a>
+        <Link href="/">
+          <a className="text-3xl font-bold text-green-800">WindBnB</a>
+        </Link>
       </div>
 
       <div className="relative">
