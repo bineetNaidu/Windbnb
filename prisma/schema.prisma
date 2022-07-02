@@ -20,6 +20,7 @@ model Host {
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @updatedAt @map(name: "updated_at")
   rooms       Room[]
+  isSuperhost Boolean  @default(false) @map("is_superhost")
 
   @@map(name: "hosts")
 }
@@ -28,10 +29,8 @@ model Room {
   id                 Int      @id @default(autoincrement())
   name               String
   images             String[]
-  rating             Int      @default(0)
   apartmentType      String   @map("apartment_type")
   location           String
-  isSuperhost        Boolean  @default(false) @map("is_superhost")
   beds               Int      @default(0)
   bedrooms           Int      @default(0)
   bathrooms          Int      @default(0)
