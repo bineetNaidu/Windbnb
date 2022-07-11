@@ -1,12 +1,12 @@
-import Layout from '../../components/Layout';
+import { Input, InputWrapper } from '@mantine/core';
+import { DateRangePicker } from '@mantine/dates';
 import type { GetServerSidePropsContext, NextPage } from 'next';
-import { dehydrate, useQuery } from 'react-query';
-import { getRoom, queryClient } from '../../lib/requestClients';
+import Head from 'next/head';
 import Image from 'next/image';
 import { useMemo, useState } from 'react';
-import { DateRangePicker } from '@mantine/dates';
-import { Input, InputWrapper } from '@mantine/core';
-import Head from 'next/head';
+import { dehydrate, useQuery } from 'react-query';
+import Layout from '../../components/Layout';
+import { getRoom, queryClient } from '../../lib/requestClients';
 
 const Home: NextPage<{ roomId: number }> = ({ roomId }) => {
   const { data, isLoading } = useQuery(['room'], () => getRoom({ id: roomId }));
@@ -200,7 +200,7 @@ const Home: NextPage<{ roomId: number }> = ({ roomId }) => {
                       className="bg-green-500 text-white font-bold py-2 px-10 rounded-lg 
 											hover:bg-green-600 transition-all active:shadow-lg"
                     >
-                      Reverse
+                      Reserve Now
                     </button>
                     <span className="text-green-600 font-light mt-4">
                       You wont be charged yet
