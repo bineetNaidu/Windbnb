@@ -28,7 +28,7 @@
     "@mantine/next": "^4.2.11",
     "@prisma/client": "^4.0.0",
     "apollo-server-micro": "^3.9.0",
-    "class-validator": "^0.13.2",
+    "class-validator": "^0.14.0",
     "dayjs": "^1.11.3",
     "formik": "^2.2.9",
     "graphql": "^15.5.0",
